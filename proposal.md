@@ -43,48 +43,11 @@ We should try to set up a real-time discussion each week though, preferably clos
 
 ## Project Structure
 
-### Major Priority
+Our major priorities are:
 
 - Dynamic way
 - Source and binary distribution generation
 - Cross compilation
-
-### Other Issues
-
-- Test suite support (Rewrite `make`-based testsuite with Haskell?)
-- Validation support (https://github.com/snowleopard/hadrian/issues/187)
-- Provide legacy interface
-- iserv-bin requires a wrapper
-
-### Cross Compilation
-
-#### Overview
-
-We want to support cross-compilation in Hadrian, that user can specify a different target
-and build a Stage1 compiler that compiles code for that target.
-
-**FIXME**: needs more investigation into what current system does.
-
-First, we need a compiler flag to turn on cross compilation. And we need to write some configs in the build settings (like `Settings.hs`).
-
-Second, we need to tweak here and there to make sure that cross compilation config will be considered and lead to some changes in output (like some changes in `CC` flags).
-
-Finally, we need a way to test this -- using an emulator of different architecture would be good enough.
-
-#### References
-
-Issue: https://github.com/snowleopard/hadrian/issues/177
-
-GHC doc:
-
-- https://ghc.haskell.org/trac/ghc/wiki/CrossCompilation
-- https://ghc.haskell.org/trac/ghc/wiki/Building/CrossCompiling
-
-Old build system:
-
-- [CrossCompiling vs Stage1Only](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L555-L572)
-- [Stage1Only vs stage=1](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L574-L603)
-- [No stage2 packages when CrossCompiling or Stage1Only](https://github.com/ghc/ghc/blob/3b6a4909ff579507a7f9527264e0cb8464fbe555/ghc.mk#L1448-L1490)
 
 ### Dynamic way
 
@@ -94,9 +57,16 @@ The dynamic way is a flag, which when turned on, will instruct the build system 
 
 The key is to make rules for `*.so` objects.
 
+Talk to Jose Calderon (@jmct).
+
 #### References
 
 Issue: https://github.com/snowleopard/hadrian/issues/4
+
+Affected issues:
+
+- https://github.com/snowleopard/hadrian/issues/248
+- https://github.com/snowleopard/hadrian/issues/105
 
 GHC doc:
 
@@ -131,6 +101,36 @@ Old build system:
 - install: `ghc.mk:872`: figure out what kinds of files need to be installed, from where, and to where.
 - binary-dist: `Makefile`, dispatches to `unix-binary-dist-prep` or `windows-...` (in `ghc.mk`)
 
+### Cross Compilation
+
+#### Overview
+
+We want to support cross-compilation in Hadrian, that user can specify a different target
+and build a Stage1 compiler that compiles code for that target.
+
+**FIXME**: needs more investigation into what current system does.
+
+First, we need a compiler flag to turn on cross compilation. And we need to write some configs in the build settings (like `Settings.hs`).
+
+Second, we need to tweak here and there to make sure that cross compilation config will be considered and lead to some changes in output (like some changes in `CC` flags).
+
+Finally, we need a way to test this -- using an emulator of different architecture would be good enough.
+
+#### References
+
+Issue: https://github.com/snowleopard/hadrian/issues/177
+
+GHC doc:
+
+- https://ghc.haskell.org/trac/ghc/wiki/CrossCompilation
+- https://ghc.haskell.org/trac/ghc/wiki/Building/CrossCompiling
+
+Old build system:
+
+- [CrossCompiling vs Stage1Only](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L555-L572)
+- [Stage1Only vs stage=1](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L574-L603)
+- [No stage2 packages when CrossCompiling or Stage1Only](https://github.com/ghc/ghc/blob/3b6a4909ff579507a7f9527264e0cb8464fbe555/ghc.mk#L1448-L1490)
+
 ### Test and Validate Support
 
 #### Overview
@@ -139,12 +139,20 @@ The testsuite (XXX: link here) are a completely separate part, written in `make`
 
 #### References
 
-Issue: https://github.com/snowleopard/hadrian/issues/197
+Issues:
+
+- https://github.com/snowleopard/hadrian/issues/197
+- https://github.com/snowleopard/hadrian/issues/187
 
 GHC doc:
 
 - https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests/Running
 - https://ghc.haskell.org/trac/ghc/wiki/TestingPatches
+
+### Other Issues
+
+- Provide legacy interface
+- iserv-bin requires a wrapper
 
 ## Timeline
 
@@ -154,15 +162,9 @@ Before Midterm evaluation (July 18rd), I hope to be familiar with the majority o
 
 Before the End of Work (September 2nd), I plan to finish the left major goals (all rest, since @snowleopard doesn't know much about it).
 
+## General References
 
-## Some random notes
-
-### GHC build system
-
-https://ghc.haskell.org/trac/ghc/wiki/Building
-
-### Meta
-
-You get to understand what each important issue you'd like address means. Even this can construct a several page run-down. As far as solutions, what is current here (none or partial), and what needs to be done (in principle, and in referencing the old build system).
-
-Also, you have to be able to read the old Make scripts...
+- [GHC build system](https://ghc.haskell.org/trac/ghc/wiki/Building)
+- [Shake home](http://shakebuild.com)
+- Shake paper: [Shake Before Building: Replacing Make with Haskell](http://ndmitchell.com/downloads/paper-shake_before_building-10_sep_2012.pdf)
+- Hadrian paper: [Non-recursive Make Considered Harmful: Build Systems at Scale](https://www.staff.ncl.ac.uk/andrey.mokhov/Hadrian.pdf)
