@@ -18,28 +18,76 @@ Finally, I will stay in China from the entire working period (I will graduate at
 - Participated in discussion about several issues: ????
 - Submitted / Solved some issues: ????
 
-## Project Overview
+### Fix dynamic way
 
-### Significance -- The Last Mile
+By insert the following `buildDynLib` rule into the `packageRules`, I retrieved the names of `*.so`
+to build correctly.
 
+```
+buildDynLib :: Rules ()
+buildDynLib =
+  "_build//*.so" %> so -> error $ show so
+```
 
-### Workflow
+## Workflow
+
 We sure need two pieces of build, one standard, one hadrian, so we know the difference and can compare side by side
 
 Hadrian team is smaller and the project is not as big and mature as my GSoC project, but I think it is a chance to promote better community working style such as through email/IRC/slack etc.
 
 I will keep a weekly report on my completed tasks and planned ones.
 
+During the proposing period, I will actively use GitHub as a venue of discussion, since we are in different timezones and we want a open discussion so everyone can participate even though we have a relatively small team.
+
+We should try to set up a real-time discussion each week though, preferably closely after my weekly report is read. We can discussion about them in a much faster pace, through either IRC or slack. I think each real time discussion would take around half an hour to one hour.
+
 ## Project Structure
 
-- Cross compilation
-- Source and binary distribution generation
+### Major Priority
+
 - Dynamic way
-- Test suite support
+- Source and binary distribution generation
+- Cross compilation
+
+### Other Issues
+
+- Test suite support (Rewrite `make`-based testsuite with Haskell?)
+- Validation support (https://github.com/snowleopard/hadrian/issues/187)
+- Provide legacy interface
+- iserv-bin requires a wrapper
 
 ### Cross Compilation
 
+#### Overview
 
+We want to support cross-compilation in Hadrian, that user can specify a different target
+and build a Stage1 compiler that compiles code for that target.
+
+**FIXME**: needs more investigation into what current system does.
+
+First, we need a compiler flag to turn on cross compilation. And we need to write some configs in the build settings (like `Settings.hs`).
+
+Second, we need to tweak here and there to make sure that cross compilation config will be considered and lead to some changes in output (like some changes in `CC` flags).
+
+Finally, we need a way to test this -- using an emulator of different architecture would be good enough.
+
+#### References
+
+Issue: https://github.com/snowleopard/hadrian/issues/177
+
+Related GHC doc:
+
+- https://ghc.haskell.org/trac/ghc/wiki/CrossCompilation
+- https://ghc.haskell.org/trac/ghc/wiki/Building/CrossCompiling
+
+Notes in` mk/config.mk.in`:
+
+- Note [CrossCompiling vs Stage1Only](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L555-L572)
+- Note [Stage1Only vs stage=1](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L574-L603)
+
+Notes in the toplevel `ghc.mk` file:
+
+- Note [No stage2 packages when CrossCompiling or Stage1Only](https://github.com/ghc/ghc/blob/3b6a4909ff579507a7f9527264e0cb8464fbe555/ghc.mk#L1448-L1490)
 
 ### Dynamic way
 
@@ -51,9 +99,40 @@ https://ghc.haskell.org/trac/ghc/wiki/Building/Architecture/Idiom/VanillaWay
 
 `mk/ways.mk`
 
+Translate dynamic parts from `rules/build-package-way.mk`.
+
 ### Source and Binary Distribution Generation
 
-### Test Suite Support
+https://github.com/snowleopard/hadrian/issues/219
+
+`install`, [x] `sdist`, `binary-dist` rules in makefiles.
+
+[PR #265: Implement 'sdist-ghc' rule](https://github.com/snowleopard/hadrian/pull/265)
+
+This should not be hard:
+
+`rules/bindist.mk`: A rule to add file to binary dist list
+
+`mk/install.mk.in`: Sets up the installation directories
+
+install: `ghc.mk:872`: figure out what kinds of files need to be installed, from where, and to where.
+
+binary-dist: `Makefile`, dispatches to `unix-binary-dist-prep` or `windows-...` (in `ghc.mk`)
+
+### Test Suite Support [NOT part of MVP though]
+
+https://github.com/snowleopard/hadrian/issues/197
+
+What is the difference between `test` and the `validate`?
+
+https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests
+
+We care about https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests/Running
+
+User: run either `make fasttest`, `make test` (which uses the normal speed settings) or `make slowtest` (called fulltest in GHC <= 7.10).
+
+`validate`: https://ghc.haskell.org/trac/ghc/wiki/TestingPatches
+
 
 ## Timeline
 
