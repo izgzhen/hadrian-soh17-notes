@@ -75,64 +75,76 @@ Finally, we need a way to test this -- using an emulator of different architectu
 
 Issue: https://github.com/snowleopard/hadrian/issues/177
 
-Related GHC doc:
+GHC doc:
 
 - https://ghc.haskell.org/trac/ghc/wiki/CrossCompilation
 - https://ghc.haskell.org/trac/ghc/wiki/Building/CrossCompiling
 
-Notes in` mk/config.mk.in`:
+Old build system:
 
-- Note [CrossCompiling vs Stage1Only](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L555-L572)
-- Note [Stage1Only vs stage=1](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L574-L603)
-
-Notes in the toplevel `ghc.mk` file:
-
-- Note [No stage2 packages when CrossCompiling or Stage1Only](https://github.com/ghc/ghc/blob/3b6a4909ff579507a7f9527264e0cb8464fbe555/ghc.mk#L1448-L1490)
+- [CrossCompiling vs Stage1Only](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L555-L572)
+- [Stage1Only vs stage=1](https://github.com/ghc/ghc/blob/master/mk/config.mk.in#L574-L603)
+- [No stage2 packages when CrossCompiling or Stage1Only](https://github.com/ghc/ghc/blob/3b6a4909ff579507a7f9527264e0cb8464fbe555/ghc.mk#L1448-L1490)
 
 ### Dynamic way
 
-https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/shared_libs.html#using-shared-libs
+#### Overview
 
-https://github.com/snowleopard/hadrian/issues/4
+The dynamic way is a flag, which when turned on, will instruct the build system to create shared libs for packages, such as `base`. So when the dependents are built with dynamic flag on, they will be linked to these shared libraries, rather than static ones.
 
-https://ghc.haskell.org/trac/ghc/wiki/Building/Architecture/Idiom/VanillaWay
+The key is to make rules for `*.so` objects.
 
-`mk/ways.mk`
+#### References
 
-Translate dynamic parts from `rules/build-package-way.mk`.
+Issue: https://github.com/snowleopard/hadrian/issues/4
+
+GHC doc:
+
+- https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/shared_libs.html#using-shared-libs
+- https://ghc.haskell.org/trac/ghc/wiki/Building/Architecture/Idiom/VanillaWay
+
+Old build system:
+
+- `mk/ways.mk`
+- `rules/build-package-way.mk`.
 
 ### Source and Binary Distribution Generation
 
-https://github.com/snowleopard/hadrian/issues/219
+#### Overview
 
-`install`, [x] `sdist`, `binary-dist` rules in makefiles.
+Implement `install` and `binary-dist` rules in makefiles.
 
-[PR #265: Implement 'sdist-ghc' rule](https://github.com/snowleopard/hadrian/pull/265)
+They are basically just moving files around and packaging stuff together, which should not be very hard.
 
-This should not be hard:
+#### References
 
-`rules/bindist.mk`: A rule to add file to binary dist list
+Issue: https://github.com/snowleopard/hadrian/issues/219
 
-`mk/install.mk.in`: Sets up the installation directories
+Relevant bits in Hadrian:
 
-install: `ghc.mk:872`: figure out what kinds of files need to be installed, from where, and to where.
+- [PR #265: Implement 'sdist-ghc' rule](https://github.com/snowleopard/hadrian/pull/265)
 
-binary-dist: `Makefile`, dispatches to `unix-binary-dist-prep` or `windows-...` (in `ghc.mk`)
+Old build system:
 
-### Test Suite Support [NOT part of MVP though]
+- `rules/bindist.mk`: A rule to add file to binary dist list
+- `mk/install.mk.in`: Sets up the installation directories
+- install: `ghc.mk:872`: figure out what kinds of files need to be installed, from where, and to where.
+- binary-dist: `Makefile`, dispatches to `unix-binary-dist-prep` or `windows-...` (in `ghc.mk`)
 
-https://github.com/snowleopard/hadrian/issues/197
+### Test and Validate Support
 
-What is the difference between `test` and the `validate`?
+#### Overview
 
-https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests
+The testsuite (XXX: link here) are a completely separate part, written in `make`, and currently called by hadrian. However, getting rid of these part of `Makefile`s is also part of the project goal, even if not that urgent (or standing in the way of merging into the GHC master).
 
-We care about https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests/Running
+#### References
 
-User: run either `make fasttest`, `make test` (which uses the normal speed settings) or `make slowtest` (called fulltest in GHC <= 7.10).
+Issue: https://github.com/snowleopard/hadrian/issues/197
 
-`validate`: https://ghc.haskell.org/trac/ghc/wiki/TestingPatches
+GHC doc:
 
+- https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests/Running
+- https://ghc.haskell.org/trac/ghc/wiki/TestingPatches
 
 ## Timeline
 
