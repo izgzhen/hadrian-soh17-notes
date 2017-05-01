@@ -5,18 +5,18 @@ Proposal (Draft)
 
 I am really excited about help pushing Shake build into the official GHC tree. I have known Shake for quite a bit of time (used it experimentally in one of my old [Haskell static blog generator project](https://github.com/izgzhen/bbq-sg)).
 
-Regarding GHC, I was also a contributor to [HaLVM project](https://github.com/GaloisInc/HaLVM), where I had to wrestle with the GHC build script as well (though not trying to *kill* them). So my conclusion is: I am kinda good at tinkering this kind of complex nasty system.
+Regarding GHC, I was also a contributor to [HaLVM project](https://github.com/GaloisInc/HaLVM), where I had to wrestle with (not *kill*) the GHC build script as well. My feeling is that I am kinda good at tinkering this kind of complex nasty system.
 
 Besides the most relevant parts, I am a regular open source contributor, a system hacker, and a functional language enthusiast. I participated in last year's GSoC, working on [Servo](https://servo.org) browser engine using Rust language, under the Mozilla organization.
 
-Finally, I will stay in China from the entire working period (I will graduate at June!!), and after that, I will come to U.S. at around Sept. 10th for starting my PhD on [PL/SE at UW](http://uwplse.org).
+About some general info, I will stay in China for the entire working period (I will graduate at June!!), and after that, I will come to U.S. at around Sept. 10th to start my PhD on [PL/SE at UW](http://uwplse.org).
 
-For more information about me and my interest, you can take a look at my [GitHub](https://github.com/izgzhen) and my [homepage](https://zhenzhang.me).
+For more information about me and my interest, you can take a look at my [GitHub](https://github.com/izgzhen) and [homepage](https://zhenzhang.me).
 
 ## Preliminary Research
 
 - I read the Hadrian paper (Haskell Symposium 2016)
-- I went through the sources while flipping over the existing issues
+- I went through the sources and the existing issues
 - I created or participated in discussions on several issues
     + [Document on debugging Hadrian](https://github.com/snowleopard/hadrian/issues/308)
     + [Track GHC commit](https://github.com/snowleopard/hadrian/issues/306)
@@ -150,9 +150,9 @@ GHC doc:
 
 ### Increase the "throughput" of working
 
-One of the hardest part of working on something like Hadrian, is to improve your efficiency of development. For even a tiny bit of chance to the build system, it is highly possible that I have to rebuild another GHC, which can be a burden on my Macbook. Also, we work in very different time zones, and sometimes we can't be very responsive regarding certain discussion. However, there are some ways to improve the "throughput" of the development, thus gaining better overall efficiency:
+One of the hardest part of working on something like Hadrian is to improve your efficiency of development. For even a tiny bit of change to the build system, it is highly possible that I have to rebuild another GHC, which can be a burden on my Macbook. Also, sometimes we can't be very responsive in online discussion because of timezone difference etc. However, there are still some ways to improve the "throughput" of development, thus gaining better overall efficiency:
 
-- **Batch Processing**: I usually deployed multiple pieces of GHC (one standard, two or three Hadrian based). First in this setting, reviewer and I can track two or more different issues concurrently. And secondly, I can compare Shake-based system with Make-based system side-by-side
+- **Batch Processing**: I usually deployed multiple pieces of GHC (one standard, two or three Hadrian based). The good thing about this is that 1. Reviewers and I can track two or more different issues concurrently; 2. I can compare Shake-based system with Make-based system side-by-side
 - **Decomposition**: Effective decomposition of a big task into several more tractable issues can greatly improve the throughput, for the same reason that smaller chucks of rocks gets through the bottleneck easier
 
 ### Communication
