@@ -3,61 +3,57 @@ Proposal (Draft)
 
 ## Introduction
 
-I am really excited about help pushing Shake build into the official GHC tree. I have been knowing Shake for quite a bit of time (used it experimentally in one of my old [Haskell static blog generator project](https://github.com/izgzhen/bbq-sg)).
+I am really excited about help pushing Shake build into the official GHC tree. I have known Shake for quite a bit of time (used it experimentally in one of my old [Haskell static blog generator project](https://github.com/izgzhen/bbq-sg)).
 
-Regarding GHC, I was also a contributor to [HaLVM project](https://github.com/GaloisInc/HaLVM), where I had to mangle with the GHC build script as well (though not as deep as Hadrian needs to). So my conclusion is: I am kinda good at tinkering this kind of complex system.
+Regarding GHC, I was also a contributor to [HaLVM project](https://github.com/GaloisInc/HaLVM), where I had to wrestle with the GHC build script as well (though not trying to *kill* them). So my conclusion is: I am kinda good at tinkering this kind of complex nasty system.
 
-Besides the most relevant parts, I am a regular open source contributor, a system hacker, and a functional language enthusiast. I participated in last year's GSoC, working on [Servo](https://servo.org) browser engine using Rust language under the mentoring of Mozilla Org. I am also involved in many other stuff, which can be accessed through https://github.com/izgzhen.
+Besides the most relevant parts, I am a regular open source contributor, a system hacker, and a functional language enthusiast. I participated in last year's GSoC, working on [Servo](https://servo.org) browser engine using Rust language, under the Mozilla organization.
 
 Finally, I will stay in China from the entire working period (I will graduate at June!!), and after that, I will come to U.S. at around Sept. 10th for starting my PhD on [PL/SE at UW](http://uwplse.org).
 
+For more information about me and my interest, you can take a look at my [GitHub](https://github.com/izgzhen) and my [homepage](https://zhenzhang.me).
+
 ## Preliminary Research
 
-- I've read the paper on Haskell 16'
-- Going through the sources while flipping over the existing issues
-- Participated in discussion about several issues: ????
-- Submitted / Solved some issues: ????
-
-### Fix dynamic way
-
-By insert the following `buildDynLib` rule into the `packageRules`, I retrieved the names of `*.so`
-to build correctly.
-
-```
-buildDynLib :: Rules ()
-buildDynLib =
-  "_build//*.so" %> so -> error $ show so
-```
-
-## Workflow
-
-We sure need two pieces of build, one standard, one hadrian, so we know the difference and can compare side by side
-
-Hadrian team is smaller and the project is not as big and mature as my GSoC project, but I think it is a chance to promote better community working style such as through email/IRC/slack etc.
-
-I will keep a weekly report on my completed tasks and planned ones.
-
-During the proposing period, I will actively use GitHub as a venue of discussion, since we are in different timezones and we want a open discussion so everyone can participate even though we have a relatively small team.
-
-We should try to set up a real-time discussion each week though, preferably closely after my weekly report is read. We can discussion about them in a much faster pace, through either IRC or slack. I think each real time discussion would take around half an hour to one hour.
+- I read the Hadrian paper (Haskell Symposium 2016)
+- I went through the sources while flipping over the existing issues
+- I created or participated in discussions on several issues
+    + [Document on debugging Hadrian](https://github.com/snowleopard/hadrian/issues/308)
+    + [Track GHC commit](https://github.com/snowleopard/hadrian/issues/306)
+    + [runhaskell can't find ghc](https://github.com/snowleopard/hadrian/issues/304)
+    + [Implement installation and binary/source distribution rules](https://github.com/snowleopard/hadrian/issues/219)
+    + [Fix dynamic way](https://github.com/snowleopard/hadrian/issues/4)
+    + [Fix validation failures](https://github.com/snowleopard/hadrian/issues/299)
+- Submitted some small PRs:
+    + [Disable some warnings](https://github.com/snowleopard/hadrian/pull/307)
+    + [Add wrapper for Runhaskell, Fix #304](https://github.com/snowleopard/hadrian/pull/305)
 
 ## Project Structure
 
 Our major priorities are:
 
-- Dynamic way
-- Source and binary distribution generation
-- Cross compilation
+- [Fix dynamic way](https://github.com/snowleopard/hadrian/issues/4)
+- [Install and binary distribution generation](https://github.com/snowleopard/hadrian/issues/219)
+- [Cross compilation](https://github.com/snowleopard/hadrian/issues/177)
 
-### Dynamic way
+I plan to solve at least these three major issues during the summer, and also some other smaller ones in the meanwhile.
+
+Some general references:
+
+- [GHC build system](https://ghc.haskell.org/trac/ghc/wiki/Building)
+- [Shake home](http://shakebuild.com)
+- Shake paper: [Shake Before Building: Replacing Make with Haskell](http://ndmitchell.com/downloads/paper-shake_before_building-10_sep_2012.pdf)
+- Hadrian paper: [Non-recursive Make Considered Harmful: Build Systems at Scale](https://www.staff.ncl.ac.uk/andrey.mokhov/Hadrian.pdf)
+
+### Fix the Dynamic Way
 
 #### Overview
 
 The dynamic way is a flag, which when turned on, will instruct the build system to create shared libs for packages, such as `base`. So when the dependents are built with dynamic flag on, they will be linked to these shared libraries, rather than static ones.
 
-The key is to make rules for `*.so` objects.
+So basically this is to write build rules for `*.so` objects.
 
-Talk to Jose Calderon (@jmct).
+Jose Calderon (@jmct) already had some progress on this issue. I need to talk to him more about this.
 
 #### References
 
@@ -82,17 +78,20 @@ Old build system:
 
 #### Overview
 
-Implement `install` and `binary-dist` rules in makefiles.
+Implement `install` and `binary-dist` rules in makefiles. This is about writing rules for moving files around and packaging stuff together.
 
-They are basically just moving files around and packaging stuff together, which should not be very hard.
+For `install`, it has two command line configurations worth mentioning:
+
+1. `prefix`: the default location for installation, used like `./configure --prefix=...` or `make install --prefix=....`
+2. `DESTDIR`: the optional location for installation, used like `make install DESTDIR=...`
 
 #### References
 
 Issue: https://github.com/snowleopard/hadrian/issues/219
 
-Relevant bits in Hadrian:
+Relevant bits in Hadrian: [PR #265: Implement 'sdist-ghc' rule](https://github.com/snowleopard/hadrian/pull/265)
 
-- [PR #265: Implement 'sdist-ghc' rule](https://github.com/snowleopard/hadrian/pull/265)
+GHC doc: https://ghc.haskell.org/trac/ghc/wiki/Building/Installing
 
 Old build system:
 
@@ -107,8 +106,6 @@ Old build system:
 
 We want to support cross-compilation in Hadrian, that user can specify a different target
 and build a Stage1 compiler that compiles code for that target.
-
-**FIXME**: needs more investigation into what current system does.
 
 First, we need a compiler flag to turn on cross compilation. And we need to write some configs in the build settings (like `Settings.hs`).
 
@@ -135,7 +132,7 @@ Old build system:
 
 #### Overview
 
-The testsuite (XXX: link here) are a completely separate part, written in `make`, and currently called by hadrian. However, getting rid of these part of `Makefile`s is also part of the project goal, even if not that urgent (or standing in the way of merging into the GHC master).
+The [testsuite](https://github.com/ghc/ghc/tree/master/testsuite) are a completely separate part, written for `make`, and currently [used by Hadrian through a python wrapper](https://github.com/snowleopard/hadrian/blob/master/src/Rules/Test.hs). However, to improve the maintainability of this test suite, rewriting it entirely with Shake will be profitable, even though it is a relatively independent part from what we have now.
 
 #### References
 
@@ -149,22 +146,29 @@ GHC doc:
 - https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTests/Running
 - https://ghc.haskell.org/trac/ghc/wiki/TestingPatches
 
-### Other Issues
+## Workflow
 
-- Provide legacy interface
-- iserv-bin requires a wrapper
+### Increase the "throughput" of working
+
+One of the hardest part of working on something like Hadrian, is to improve your efficiency of development. For even a tiny bit of chance to the build system, it is highly possible that I have to rebuild another GHC, which can be a burden on my Macbook. Also, we work in very different time zones, and sometimes we can't be very responsive regarding certain discussion. However, there are some ways to improve the "throughput" of the development, thus gaining better overall efficiency:
+
+- **Batch Processing**: I usually deployed multiple pieces of GHC (one standard, two or three Hadrian based). First in this setting, reviewer and I can track two or more different issues concurrently. And secondly, I can compare Shake-based system with Make-based system side-by-side
+- **Decomposition**: Effective decomposition of a big task into several more tractable issues can greatly improve the throughput, for the same reason that smaller chucks of rocks gets through the bottleneck easier
+
+### Communication
+
+GitHub will be our major tool of communication, mostly resolving around a specific issue.
+
+For more general stuff, we can discuss through emails. A mail-list might be necessary in future if we find it hard to track the emails (which is unlikely to happen now).
+
+We should try to set up a real-time discussion each week though, preferably closely after my weekly report is read. We can discussion about them in a much faster pace, through either IRC or slack. I think each real time discussion would take around half an hour to one hour.
+
+Also, I will try to keep a openly-accessible weekly report on my completed tasks and planned ones.
 
 ## Timeline
 
-Though "June 13th" is the official begin-to-work day, I will start working incrementally & in a slow pace and refining the targets from the end of April. It doesn't really matter even I will not be accepted, so just take it as myself evaluating the project.
+**May ~ June**: Familiarize with the project's source code, the usage of Shake, and the usage of Make in GHC. Solve some small issues.
 
-Before Midterm evaluation (July 18rd), I hope to be familiar with the majority of the code base, of the GHC old build system script meanings, and solve one to two major targets (from dynamic way and test suite).
+**Before Midterm evaluation (July 18rd)**: Solve one to two major priorities and other smaller issues.
 
-Before the End of Work (September 2nd), I plan to finish the left major goals (all rest, since @snowleopard doesn't know much about it).
-
-## General References
-
-- [GHC build system](https://ghc.haskell.org/trac/ghc/wiki/Building)
-- [Shake home](http://shakebuild.com)
-- Shake paper: [Shake Before Building: Replacing Make with Haskell](http://ndmitchell.com/downloads/paper-shake_before_building-10_sep_2012.pdf)
-- Hadrian paper: [Non-recursive Make Considered Harmful: Build Systems at Scale](https://www.staff.ncl.ac.uk/andrey.mokhov/Hadrian.pdf)
+**Before the End of Work (September 2nd)**: Solve the left major priorities. Review on what else needs to be done to actually ship Hadrian.
