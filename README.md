@@ -19,6 +19,7 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 ### Pending PRs
 
 - [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
+- [Fix implicit assumption about inplace installation etc.](https://github.com/snowleopard/hadrian/pull/315)
 
 ### Merged PRs
 
@@ -30,3 +31,4 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 ## This Week in Hadrian
 
 - [Week 1](weekly-notes/week1.md)
+- [Week 2](weekly-notes/week2.md)

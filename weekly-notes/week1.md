@@ -1,9 +1,6 @@
 Week 1
 ====
 
-## TODOs
+## Completed
 
-- [ ] Finish the basic install rules
-- [ ] Reflect over the whole project and might write something up
-- [ ] Initiate the document on debugging Hadrian
-
+- [x] Keep pushing the implementation of installation rules. Not finished yet because of various problems in the last `installPackages` step.
