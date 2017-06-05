@@ -15,11 +15,13 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Fix dynamic way](https://github.com/snowleopard/hadrian/issues/4)
 - [Implement installation and binary/source distribution rules](https://github.com/snowleopard/hadrian/issues/219)
 - [Support building cross compilers](https://github.com/snowleopard/hadrian/issues/177)
+- [ghc-cabal copy assumes library artifacts in build subpath](https://github.com/snowleopard/hadrian/issues/318)
 
 ### Pending PRs
 
 - [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
 - [Fix implicit assumption about inplace installation etc.](https://github.com/snowleopard/hadrian/pull/315)
+- [Add more utilities including install and symbolic link](https://github.com/snowleopard/hadrian/pull/316)
 
 ### Merged PRs
 
