@@ -16,11 +16,14 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Implement installation and binary/source distribution rules](https://github.com/snowleopard/hadrian/issues/219)
 - [Support building cross compilers](https://github.com/snowleopard/hadrian/issues/177)
 - [ghc-cabal copy assumes library artifacts in build subpath](https://github.com/snowleopard/hadrian/issues/318)
+- [compiler package cabal file assumes built artifact's path](https://github.com/snowleopard/hadrian/issues/327)
+- [Should pre-defined build flavors be consistent with the old system?](https://github.com/snowleopard/hadrian/issues/326)
 
 ### Pending PRs
 
 - [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
 - [Fix documentation rules](https://github.com/snowleopard/hadrian/pull/324)
+- [Build dynamic lib](https://github.com/snowleopard/hadrian/pull/325)
 
 ### Merged PRs
 
@@ -40,3 +43,4 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Week 2](weekly-notes/week2.md)
 - [Week 3](weekly-notes/week3.md)
 - [Week 4](weekly-notes/week4.md)
+- [Week 5](weekly-notes/week5.md)
