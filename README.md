@@ -21,9 +21,7 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 
 ### Pending PRs
 
-- [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
 - [Fix documentation rules](https://github.com/snowleopard/hadrian/pull/324)
-- [Build dynamic lib](https://github.com/snowleopard/hadrian/pull/325)
 
 ### Merged PRs
 
@@ -35,7 +33,9 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Fix CABAL_VERSION argument in building ghc-cabal](https://github.com/snowleopard/hadrian/pull/319)
 - [Add binary wrappers for hp2ps, hpc, hsc2hs](https://github.com/snowleopard/hadrian/pull/321)
 - [Add more utilities including install and symbolic link](https://github.com/snowleopard/hadrian/pull/316)
-
+- [Drop dependency on hoopl](https://github.com/snowleopard/hadrian/pull/328)
+- [Build dynamic libs](https://github.com/snowleopard/hadrian/pull/325)
+- [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
 
 ## This Week in Hadrian
 
@@ -44,3 +44,4 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Week 3](weekly-notes/week3.md)
 - [Week 4](weekly-notes/week4.md)
 - [Week 5](weekly-notes/week5.md)
+- [Week 6](weekly-notes/week6.md)
