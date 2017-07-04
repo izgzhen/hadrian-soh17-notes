@@ -22,6 +22,8 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 ### Pending PRs
 
 - [Fix documentation rules](https://github.com/snowleopard/hadrian/pull/324)
+- [Add Stage1Only rule](https://github.com/snowleopard/hadrian/pull/340)
+- [Update flavours doc](https://github.com/snowleopard/hadrian/pull/338)
 
 ### Merged PRs
 
@@ -36,6 +38,7 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Drop dependency on hoopl](https://github.com/snowleopard/hadrian/pull/328)
 - [Build dynamic libs](https://github.com/snowleopard/hadrian/pull/325)
 - [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
+- [Fix setup-config dependency](https://github.com/snowleopard/hadrian/pull/334)
 
 ## This Week in Hadrian
 
@@ -45,3 +48,4 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Week 4](weekly-notes/week4.md)
 - [Week 5](weekly-notes/week5.md)
 - [Week 6](weekly-notes/week6.md)
+- [Week 7](weekly-notes/week7.md)
