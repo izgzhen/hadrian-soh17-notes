@@ -12,7 +12,6 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 ### Opened Issues
 
 - [Document on debugging Hadrian](https://github.com/snowleopard/hadrian/issues/308)
-- [Fix dynamic way](https://github.com/snowleopard/hadrian/issues/4)
 - [Implement installation and binary/source distribution rules](https://github.com/snowleopard/hadrian/issues/219)
 - [Support building cross compilers](https://github.com/snowleopard/hadrian/issues/177)
 - [ghc-cabal copy assumes library artifacts in build subpath](https://github.com/snowleopard/hadrian/issues/318)
@@ -22,8 +21,17 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Setup a status site](https://github.com/snowleopard/hadrian/issues/348)
 - [Why shakeLintIgnore doesn't turn off validity check for certain files?](https://github.com/ndmitchell/shake/issues/531)
 - [Tracking installation of built artifacts](https://github.com/snowleopard/hadrian/issues/344)
+- [build validate on Linux failed in lack of `test spaces/hsc2hs`](https://github.com/snowleopard/hadrian/issues/366)
+- [build test failed because of python subprocess "Permission denied"](https://github.com/snowleopard/hadrian/issues/361)
+- [Support fasttest and slowtest](https://github.com/snowleopard/hadrian/issues/360)
+- [Need ghc-stage2 directly will fail](https://github.com/snowleopard/hadrian/issues/359)
+- [Should "build test" need depended binaries explicitly?](https://github.com/snowleopard/hadrian/issues/358)
 
 ### Pending PRs
+
+- [Untrack copied artifacts](https://github.com/snowleopard/hadrian/pull/365)
+- [Add CircleCI script](https://github.com/snowleopard/hadrian/pull/364)
+- [Fix builder dependencies on generated files](https://github.com/snowleopard/hadrian/pull/363)
 
 ### Merged PRs
 
@@ -44,6 +52,7 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Update flavours doc](https://github.com/snowleopard/hadrian/pull/338)
 - [Better tracking of dependence in installation](https://github.com/snowleopard/hadrian/pull/353)
 - [Automate dependency analysis of installed packages](https://github.com/snowleopard/hadrian/pull/342)
+- [Fix validate's dependency on generated files](https://github.com/snowleopard/hadrian/pull/362)
 
 ## This Week in Hadrian
 
@@ -55,3 +64,4 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Week 6](weekly-notes/week6.md)
 - [Week 7](weekly-notes/week7.md)
 - [Week 8](weekly-notes/week8.md)
+- [Week 9](weekly-notes/week9.md)
