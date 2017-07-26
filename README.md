@@ -53,6 +53,15 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Better tracking of dependence in installation](https://github.com/snowleopard/hadrian/pull/353)
 - [Automate dependency analysis of installed packages](https://github.com/snowleopard/hadrian/pull/342)
 - [Fix validate's dependency on generated files](https://github.com/snowleopard/hadrian/pull/362)
+- [Add CircleCI script ](https://github.com/snowleopard/hadrian/pull/364)
+- [Fix builder dependencies on generated files](https://github.com/snowleopard/hadrian/pull/363)
+- [Fix validate's dependency on generated files](https://github.com/snowleopard/hadrian/pull/362)
+- [Fix double copy](https://github.com/snowleopard/hadrian/pull/365)
+- [Add ghc-iserv wrapper](https://github.com/snowleopard/hadrian/pull/367)
+- [Make OS X build faster and Add GHC 8.0.2 build on Travis CI](https://github.com/snowleopard/hadrian/pull/370)
+- [Drop language in Travis CI config](https://github.com/snowleopard/hadrian/pull/372)
+- [Fix validate's hsc2hs dependency (#375)](https://github.com/snowleopard/hadrian/pull/378)
+- [Fix validate's executable dependency](https://github.com/snowleopard/hadrian/pull/375)
 
 ## This Week in Hadrian
 
@@ -65,3 +74,4 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Week 7](weekly-notes/week7.md)
 - [Week 8](weekly-notes/week8.md)
 - [Week 9](weekly-notes/week9.md)
+- [Week 10](weekly-notes/week10.md)
