@@ -11,57 +11,11 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 
 ### Opened Issues
 
-- [Document on debugging Hadrian](https://github.com/snowleopard/hadrian/issues/308)
-- [Implement installation and binary/source distribution rules](https://github.com/snowleopard/hadrian/issues/219)
-- [Support building cross compilers](https://github.com/snowleopard/hadrian/issues/177)
-- [ghc-cabal copy assumes library artifacts in build subpath](https://github.com/snowleopard/hadrian/issues/318)
-- [compiler package cabal file assumes built artifact's path](https://github.com/snowleopard/hadrian/issues/327)
-- [Should pre-defined build flavors be consistent with the old system?](https://github.com/snowleopard/hadrian/issues/326)
-- [Test install rule on Windows platform](https://github.com/snowleopard/hadrian/issues/345)
-- [Setup a status site](https://github.com/snowleopard/hadrian/issues/348)
-- [Why shakeLintIgnore doesn't turn off validity check for certain files?](https://github.com/ndmitchell/shake/issues/531)
-- [Tracking installation of built artifacts](https://github.com/snowleopard/hadrian/issues/344)
-- [build validate on Linux failed in lack of `test spaces/hsc2hs`](https://github.com/snowleopard/hadrian/issues/366)
-- [build test failed because of python subprocess "Permission denied"](https://github.com/snowleopard/hadrian/issues/361)
-- [Support fasttest and slowtest](https://github.com/snowleopard/hadrian/issues/360)
-- [Need ghc-stage2 directly will fail](https://github.com/snowleopard/hadrian/issues/359)
-- [Should "build test" need depended binaries explicitly?](https://github.com/snowleopard/hadrian/issues/358)
-
-### Pending PRs
-
-- [Untrack copied artifacts](https://github.com/snowleopard/hadrian/pull/365)
-- [Add CircleCI script](https://github.com/snowleopard/hadrian/pull/364)
-- [Fix builder dependencies on generated files](https://github.com/snowleopard/hadrian/pull/363)
+https://github.com/snowleopard/hadrian/issues/created_by/izgzhen
 
 ### Merged PRs
 
-- [Add copyFileUntracked](https://github.com/snowleopard/hadrian/pull/313)
-- [Add Werror to CC and HC](https://github.com/snowleopard/hadrian/pull/309)
-- [Disable some warnings](https://github.com/snowleopard/hadrian/pull/307)
-- [Add wrapper for Runhaskell, Fix #304](https://github.com/snowleopard/hadrian/pull/305)
-- [Fix implicit assumption about inplace installation etc.](https://github.com/snowleopard/hadrian/pull/315)
-- [Fix CABAL_VERSION argument in building ghc-cabal](https://github.com/snowleopard/hadrian/pull/319)
-- [Add binary wrappers for hp2ps, hpc, hsc2hs](https://github.com/snowleopard/hadrian/pull/321)
-- [Add more utilities including install and symbolic link](https://github.com/snowleopard/hadrian/pull/316)
-- [Drop dependency on hoopl](https://github.com/snowleopard/hadrian/pull/328)
-- [Build dynamic libs](https://github.com/snowleopard/hadrian/pull/325)
-- [Add Install Rules](https://github.com/snowleopard/hadrian/pull/312)
-- [Fix setup-config dependency](https://github.com/snowleopard/hadrian/pull/334)
-- [Fix documentation rules](https://github.com/snowleopard/hadrian/pull/324)
-- [Add Stage1Only rule](https://github.com/snowleopard/hadrian/pull/340)
-- [Update flavours doc](https://github.com/snowleopard/hadrian/pull/338)
-- [Better tracking of dependence in installation](https://github.com/snowleopard/hadrian/pull/353)
-- [Automate dependency analysis of installed packages](https://github.com/snowleopard/hadrian/pull/342)
-- [Fix validate's dependency on generated files](https://github.com/snowleopard/hadrian/pull/362)
-- [Add CircleCI script ](https://github.com/snowleopard/hadrian/pull/364)
-- [Fix builder dependencies on generated files](https://github.com/snowleopard/hadrian/pull/363)
-- [Fix validate's dependency on generated files](https://github.com/snowleopard/hadrian/pull/362)
-- [Fix double copy](https://github.com/snowleopard/hadrian/pull/365)
-- [Add ghc-iserv wrapper](https://github.com/snowleopard/hadrian/pull/367)
-- [Make OS X build faster and Add GHC 8.0.2 build on Travis CI](https://github.com/snowleopard/hadrian/pull/370)
-- [Drop language in Travis CI config](https://github.com/snowleopard/hadrian/pull/372)
-- [Fix validate's hsc2hs dependency (#375)](https://github.com/snowleopard/hadrian/pull/378)
-- [Fix validate's executable dependency](https://github.com/snowleopard/hadrian/pull/375)
+[PRs](https://github.com/snowleopard/hadrian/pulls?q=is%3Apr+is%3Aclosed+author%3Aizgzhen)
 
 ## This Week in Hadrian
 
@@ -75,3 +29,7 @@ Summer of Haskell 2017: Improve the Shake-Based Hadrian Build System for GHC
 - [Week 8](weekly-notes/week8.md)
 - [Week 9](weekly-notes/week9.md)
 - [Week 10](weekly-notes/week10.md)
+- [Week 11](weekly-notes/week11.md)
+- [Week 12](weekly-notes/week12.md)
+- [Week 13](weekly-notes/week13.md)
+- [Week 14](weekly-notes/week14.md)
